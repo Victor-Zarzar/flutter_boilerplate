@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/app/features/about/presentation/pages/about_page.dart';
+import 'package:flutter_boilerplate/app/features/home/presentation/pages/home_page.dart';
+import 'package:flutter_boilerplate/app/features/settings/presentation/pages/settings_page.dart';
 import 'package:flutter_boilerplate/app/layout/desktop_layout.dart';
 import 'package:flutter_boilerplate/app/layout/mobile_layout.dart';
 import 'package:flutter_boilerplate/app/routes/app_route.dart';
