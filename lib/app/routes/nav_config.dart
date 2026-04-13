@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/app/core/utils/enum_routes.dart';
-import 'nav_destination.dart';
+import 'package:flutter_boilerplate/app/routes/app_route.dart';
+import 'package:flutter_boilerplate/app/routes/nav_destination.dart';
 
 class NavConfig {
-  static const mobile = <NavDestination>[
-    NavDestination(AppRoute.home, Icons.calculate),
-    NavDestination(AppRoute.about, Icons.info),
-    NavDestination(AppRoute.settings, Icons.settings),
+  NavConfig._();
+
+  static const List<NavDestination> items = [
+    NavDestination(route: AppRoute.home, icon: Icons.calculate),
+    NavDestination(route: AppRoute.about, icon: Icons.info),
+    NavDestination(route: AppRoute.settings, icon: Icons.settings),
   ];
 
-  static const desktop = <NavDestination>[
-    NavDestination(AppRoute.home, Icons.calculate),
-    NavDestination(AppRoute.about, Icons.info),
-    NavDestination(AppRoute.settings, Icons.settings),
-  ];
+  static const List<NavDestination> mobile = items;
+  static const List<NavDestination> desktop = items;
 }
