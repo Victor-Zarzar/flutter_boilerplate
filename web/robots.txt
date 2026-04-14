@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /user
+Disallow: /settings
+
+Allow: /
+
+Sitemap: https://localhost-example/sitemap.xml

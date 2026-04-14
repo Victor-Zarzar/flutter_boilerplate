@@ -6,9 +6,21 @@ class NavConfig {
   NavConfig._();
 
   static const List<NavDestination> items = [
-    NavDestination(route: AppRoute.home, icon: Icons.calculate),
-    NavDestination(route: AppRoute.about, icon: Icons.info),
-    NavDestination(route: AppRoute.settings, icon: Icons.settings),
+    NavDestination(
+      route: AppRoute.home,
+      icon: Icons.home_outlined,
+      label: 'Home',
+    ),
+    NavDestination(
+      route: AppRoute.about,
+      icon: Icons.info_outline,
+      label: 'About',
+    ),
+    NavDestination(
+      route: AppRoute.settings,
+      icon: Icons.settings_outlined,
+      label: 'Settings',
+    ),
   ];
 
   static const List<NavDestination> mobile = items;
