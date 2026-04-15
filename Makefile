@@ -1,6 +1,6 @@
 # Makefile Flutter Boilerplate
 PROJECT_NAME = Flutter Boilerplate
-VERSION_TAG = 1.0.0
+VERSION_TAG = $(shell grep '^version:' pubspec.yaml | awk '{print $$2}')
 
 install:
 	flutter pub get
