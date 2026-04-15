@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/app/routes/app_router_extension.dart';
 import 'package:flutter_boilerplate/app/routes/nav_config.dart';
@@ -32,7 +33,7 @@ class MobileLayout extends StatelessWidget {
         destinations: NavConfig.mobile.map((item) {
           return NavigationDestination(
             icon: Icon(item.icon),
-            label: item.route.name,
+            label: item.labelKey.tr(),
           );
         }).toList(),
       ),

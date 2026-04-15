@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/app/routes/app_router_extension.dart';
 import 'package:flutter_boilerplate/app/routes/nav_config.dart';
@@ -32,12 +33,12 @@ class DesktopLayout extends StatelessWidget {
               context.goTo(NavConfig.desktop[index].route);
             },
 
-            labelType: NavigationRailLabelType.all, // sempre mostra label
+            labelType: NavigationRailLabelType.all,
 
             destinations: NavConfig.desktop.map((item) {
               return NavigationRailDestination(
                 icon: Icon(item.icon),
-                label: Text(item.label),
+                label: Text(item.labelKey.tr()),
               );
             }).toList(),
           ),

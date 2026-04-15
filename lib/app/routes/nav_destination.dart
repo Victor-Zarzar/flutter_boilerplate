@@ -5,10 +5,10 @@ class NavDestination {
   const NavDestination({
     required this.route,
     required this.icon,
-    required this.label,
+    required this.labelKey,
   });
 
   final AppRoute route;
   final IconData icon;
-  final String label;
+  final String labelKey;
 }
