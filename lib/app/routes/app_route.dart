@@ -1,6 +1,6 @@
 enum AppRoute {
   home('/', 'home'),
-  about('/about', 'about'),
+  dashboard('/dashboard', 'dashboard'),
   settings('/settings', 'settings');
 
   const AppRoute(this.path, this.name);

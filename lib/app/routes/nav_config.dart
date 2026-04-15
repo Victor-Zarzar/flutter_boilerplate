@@ -9,17 +9,17 @@ class NavConfig {
     NavDestination(
       route: AppRoute.home,
       icon: Icons.home_outlined,
-      label: 'Home',
+      labelKey: 'home',
     ),
     NavDestination(
-      route: AppRoute.about,
-      icon: Icons.info_outline,
-      label: 'About',
+      route: AppRoute.dashboard,
+      icon: Icons.dashboard,
+      labelKey: 'dashboard',
     ),
     NavDestination(
       route: AppRoute.settings,
       icon: Icons.settings_outlined,
-      label: 'Settings',
+      labelKey: 'settings',
     ),
   ];
 

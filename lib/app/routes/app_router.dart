@@ -1,4 +1,4 @@
-import 'package:flutter_boilerplate/app/features/about/presentation/pages/about_page.dart';
+import 'package:flutter_boilerplate/app/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:flutter_boilerplate/app/features/home/presentation/pages/home_page.dart';
 import 'package:flutter_boilerplate/app/features/settings/presentation/pages/settings_page.dart';
 import 'package:flutter_boilerplate/app/layout/desktop_layout.dart';
@@ -33,12 +33,12 @@ class AppRouter {
             },
           ),
           GoRoute(
-            path: AppRoute.about.path,
-            name: AppRoute.about.name,
+            path: AppRoute.dashboard.path,
+            name: AppRoute.dashboard.name,
             pageBuilder: (context, state) {
               return NoTransitionPage(
                 key: state.pageKey,
-                child: const AboutPage(),
+                child: const DashboardPage(),
               );
             },
           ),
