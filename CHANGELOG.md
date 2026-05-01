@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0](https://github.com/Victor-Zarzar/flutter_boilerplate/compare/v1.0.0...v1.1.0) (2026-05-01)
+
+
+### Features
+
+* update deps and add new rules analysis. ([d84dbd2](https://github.com/Victor-Zarzar/flutter_boilerplate/commit/d84dbd285a4e2118598b892959624bc077362803))
+* update deps and add new rules analysis. ([d84dbd2](https://github.com/Victor-Zarzar/flutter_boilerplate/commit/d84dbd285a4e2118598b892959624bc077362803))
+* update deps and add new rules analysis. ([5561776](https://github.com/Victor-Zarzar/flutter_boilerplate/commit/5561776e789a86db22135b29298b5d90e7c21df9))
+
 ## 1.0.0 (2026-04-15)
 
 
