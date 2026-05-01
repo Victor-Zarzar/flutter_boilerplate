@@ -29,7 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
           Icons.chevron_right,
           size: 28,
           color: IconColor.primaryColor,
-          semanticLabel: "arrow_forward_icon".tr(),
+          semanticLabel: 'arrow_forward_icon'.tr(),
         ),
       ),
     );
@@ -66,7 +66,7 @@ class _SettingsPageState extends State<SettingsPage> {
             centerTitle: true,
             title: Text('settings'.tr(), style: context.h1),
           ),
-          body: Container(
+          body: ColoredBox(
             color: notifier.isDark
                 ? BackGroundColor.fourthColor
                 : BackGroundColor.primaryColor,
@@ -82,7 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       leading: Icon(
                         Icons.translate,
                         color: IconColor.primaryColor,
-                        semanticLabel: "translate_icon".tr(),
+                        semanticLabel: 'translate_icon'.tr(),
                       ),
                       title: Text(
                         'language'.tr(),
@@ -102,7 +102,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             Icon(
                               Icons.language,
                               color: IconColor.primaryColor,
-                              semanticLabel: "language_icon".tr(),
+                              semanticLabel: 'language_icon'.tr(),
                             ),
                             const SizedBox(width: 4),
                             Text(
@@ -112,7 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             Icon(
                               Icons.arrow_drop_down,
                               color: IconColor.primaryColor,
-                              semanticLabel: "arrow_drop_icon".tr(),
+                              semanticLabel: 'arrow_drop_icon'.tr(),
                             ),
                           ],
                         ),
@@ -201,14 +201,16 @@ class _SettingsPageState extends State<SettingsPage> {
                     leading: Icon(
                       Icons.color_lens,
                       color: IconColor.primaryColor,
-                      semanticLabel: "color_icon".tr(),
+                      semanticLabel: 'color_icon'.tr(),
                     ),
                     title: Text('theme'.tr(), style: context.bodyMediumFont),
                     trailing: _buildTrailingArrow(),
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const ThemePage()),
+                        MaterialPageRoute<void>(
+                          builder: (_) => const ThemePage(),
+                        ),
                       );
                     },
                   ),
@@ -217,14 +219,16 @@ class _SettingsPageState extends State<SettingsPage> {
                     leading: Icon(
                       Icons.info,
                       color: IconColor.primaryColor,
-                      semanticLabel: "info_icon".tr(),
+                      semanticLabel: 'info_icon'.tr(),
                     ),
                     title: Text('about'.tr(), style: context.bodyMediumFont),
                     trailing: _buildTrailingArrow(),
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const AboutPage()),
+                        MaterialPageRoute<void>(
+                          builder: (_) => const AboutPage(),
+                        ),
                       );
                     },
                   ),
