@@ -14,7 +14,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v5
         with:
           release-type: dart
           token: ${{ secrets.GITHUB_TOKEN }}
