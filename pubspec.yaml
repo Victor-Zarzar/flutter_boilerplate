@@ -1,7 +1,7 @@
 name: flutter_boilerplate
 description: "Flutter Boilerplate"
 publish_to: "none"
-version: 1.0.0+2
+version: 1.1.0+3
 
 environment:
   sdk: ^3.11.0
