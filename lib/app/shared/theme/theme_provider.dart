@@ -48,13 +48,13 @@ class UiProvider extends ChangeNotifier {
 
   void changeTheme(ThemeModeOption mode) {
     _themeMode = mode;
-    storage.setString("themeMode", mode.name);
+    storage.setString('themeMode', mode.name);
     notifyListeners();
   }
 
   Future<void> init() async {
     storage = await SharedPreferences.getInstance();
-    final saved = storage.getString("themeMode");
+    final saved = storage.getString('themeMode');
     _themeMode = ThemeModeOption.values.firstWhere(
       (e) => e.name == saved,
       orElse: () => ThemeModeOption.system,

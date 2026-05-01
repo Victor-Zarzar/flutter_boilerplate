@@ -23,8 +23,8 @@ class _AboutPageState extends State<AboutPage> {
 
   @override
   Widget build(BuildContext context) {
-    double myHeight = MediaQuery.of(context).size.height;
-    double myWidth = MediaQuery.of(context).size.width;
+    final double myHeight = MediaQuery.of(context).size.height;
+    final double myWidth = MediaQuery.of(context).size.width;
     return Consumer<UiProvider>(
       builder: (context, notifier, child) {
         return Scaffold(
@@ -40,7 +40,7 @@ class _AboutPageState extends State<AboutPage> {
                   width: myWidth,
                   child: AppBar(
                     leading: Semantics(
-                      label: "backtopage".tr(),
+                      label: 'backtopage'.tr(),
                       child: IconButton(
                         icon: Icon(
                           Icons.arrow_back_ios,
@@ -55,12 +55,12 @@ class _AboutPageState extends State<AboutPage> {
                     backgroundColor: notifier.isDark
                         ? AppBarColor.thirdColor
                         : AppBarColor.secondaryColor,
-                    title: Text("about".tr(), style: context.h1),
+                    title: Text('about'.tr(), style: context.h1),
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
                         Icon(
@@ -71,7 +71,7 @@ class _AboutPageState extends State<AboutPage> {
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
-                            "description".tr(),
+                            'description'.tr(),
                             style: context.h2,
                             textAlign: TextAlign.justify,
                           ),
@@ -89,7 +89,7 @@ class _AboutPageState extends State<AboutPage> {
                         _launchUrl('https://www.victorzarzar.com.br');
                       },
                       child: Text(
-                        "developed".tr(),
+                        'developed'.tr(),
                         textAlign: TextAlign.center,
                         style: context.h2,
                       ),

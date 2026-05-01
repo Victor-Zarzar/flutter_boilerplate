@@ -19,7 +19,7 @@ class ThemePage extends StatelessWidget {
               : BackGroundColor.primaryColor,
           appBar: AppBar(
             leading: Semantics(
-              label: "backtopage".tr(),
+              label: 'backtopage'.tr(),
               child: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,
@@ -30,7 +30,7 @@ class ThemePage extends StatelessWidget {
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ),
-            title: Text("select_theme".tr(), style: context.h1),
+            title: Text('select_theme'.tr(), style: context.h1),
             centerTitle: true,
             backgroundColor: notifier.isDark
                 ? AppBarColor.thirdColor
@@ -85,13 +85,13 @@ class ThemePage extends StatelessWidget {
                   String label;
                   switch (option) {
                     case ThemeModeOption.light:
-                      label = "light_theme".tr();
+                      label = 'light_theme'.tr();
                       break;
                     case ThemeModeOption.dark:
-                      label = "dark_theme".tr();
+                      label = 'dark_theme'.tr();
                       break;
                     case ThemeModeOption.system:
-                      label = "system_theme".tr();
+                      label = 'system_theme'.tr();
                       break;
                   }
 
@@ -146,11 +146,11 @@ class ThemePage extends StatelessWidget {
   String _subtitleFor(ThemeModeOption option) {
     switch (option) {
       case ThemeModeOption.system:
-        return "system_theme_description".tr();
+        return 'system_theme_description'.tr();
       case ThemeModeOption.light:
-        return "light_theme_description".tr();
+        return 'light_theme_description'.tr();
       case ThemeModeOption.dark:
-        return "dark_theme_description".tr();
+        return 'dark_theme_description'.tr();
     }
   }
 }

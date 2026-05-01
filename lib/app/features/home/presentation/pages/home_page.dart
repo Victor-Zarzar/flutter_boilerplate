@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
               : BackGroundColor.primaryColor,
           appBar: AppBar(
             centerTitle: true,
-            title: Text("home".tr(), style: context.h1),
+            title: Text('home'.tr(), style: context.h1),
             backgroundColor: notifier.isDark
                 ? AppBarColor.thirdColor
                 : AppBarColor.secondaryColor,
@@ -34,11 +34,11 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("welcome".tr(), style: context.h1),
+                Text('welcome'.tr(), style: context.h1),
                 const SizedBox(height: 8),
-                Text("home_subtitle".tr(), style: context.h2),
+                Text('home_subtitle'.tr(), style: context.h2),
                 const SizedBox(height: 20),
-                Text("quick_actions".tr(), style: context.h2),
+                Text('quick_actions'.tr(), style: context.h2),
                 const SizedBox(height: 10),
 
                 Row(
@@ -46,12 +46,12 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: _HomeActionCard(
                         icon: Icons.analytics_outlined,
-                        label: "view_metrics".tr(),
+                        label: 'view_metrics'.tr(),
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => DashboardPage(),
+                            MaterialPageRoute<void>(
+                              builder: (context) => const DashboardPage(),
                             ),
                           );
                         },
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: _HomeActionCard(
                         icon: Icons.settings_outlined,
-                        label: "settings".tr(),
+                        label: 'settings'.tr(),
                         onTap: () {},
                       ),
                     ),
@@ -69,17 +69,17 @@ class _HomePageState extends State<HomePage> {
                 ),
 
                 const SizedBox(height: 20),
-                Text("overview".tr(), style: context.h2),
+                Text('overview'.tr(), style: context.h2),
                 const SizedBox(height: 10),
 
                 Row(
                   children: [
                     Expanded(
-                      child: _MiniStatCard(title: "projects".tr(), value: "12"),
+                      child: _MiniStatCard(title: 'projects'.tr(), value: '12'),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
-                      child: _MiniStatCard(title: "tasks".tr(), value: "28"),
+                      child: _MiniStatCard(title: 'tasks'.tr(), value: '28'),
                     ),
                   ],
                 ),

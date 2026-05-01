@@ -11,7 +11,7 @@ class NotificationService {
   static Future<void> onDidReceiveNotification(
     NotificationResponse notificationResponse,
   ) async {
-    debugPrint("Notification receive: ${notificationResponse.payload}");
+    debugPrint('Notification receive: ${notificationResponse.payload}');
   }
 
   static Future<bool> areNotificationsEnabled() async {
@@ -29,7 +29,7 @@ class NotificationService {
 
   static Future<void> init() async {
     const AndroidInitializationSettings androidInitializationSettings =
-        AndroidInitializationSettings("@mipmap/ic_launcher");
+        AndroidInitializationSettings('@mipmap/ic_launcher');
     const DarwinInitializationSettings iOSInitializationSettings =
         DarwinInitializationSettings();
 
