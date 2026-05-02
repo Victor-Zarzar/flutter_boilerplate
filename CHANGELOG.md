@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/Victor-Zarzar/flutter_boilerplate/compare/v1.1.0...v1.2.0) (2026-05-02)
+
+
+### Features
+
+* add new icons / widgets and update README.md ([357dd81](https://github.com/Victor-Zarzar/flutter_boilerplate/commit/357dd81cbc8d4321c4ea9fb9fd57c45b9f17b42d))
+* add new icons / widgets and update README.md ([40a4ee3](https://github.com/Victor-Zarzar/flutter_boilerplate/commit/40a4ee3dccb0f58620f4d4a47fd4be087f33abf4))
+
 ## [1.1.0](https://github.com/Victor-Zarzar/flutter_boilerplate/compare/v1.0.0...v1.1.0) (2026-05-01)
 
 
