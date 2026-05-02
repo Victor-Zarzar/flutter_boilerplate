@@ -24,6 +24,7 @@ dependencies:
   sentry_flutter: ^9.19.0
   font_awesome_flutter: ^11.0.0
   go_router: ^17.2.2
+  skeletonizer: ^2.1.3
 
 dev_dependencies:
   flutter_test:

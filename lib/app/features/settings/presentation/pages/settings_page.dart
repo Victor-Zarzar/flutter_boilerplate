@@ -124,7 +124,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         },
                         itemBuilder: (BuildContext context) => [
                           PopupMenuItem(
-                            value: const Locale('en', 'US'),
+                            value: const Locale('en'),
                             child: Row(
                               children: [
                                 EN.asset(),
@@ -142,7 +142,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             ),
                           ),
                           PopupMenuItem(
-                            value: const Locale('pt', 'BR'),
+                            value: const Locale('pt'),
                             child: Row(
                               children: [
                                 PTBR.asset(),
