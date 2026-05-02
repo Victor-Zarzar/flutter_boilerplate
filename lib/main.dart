@@ -1,13 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter_boilerplate/app/presentation/viewmodels/locale_viewmodel.dart';
-import 'package:flutter_boilerplate/app/presentation/viewmodels/notification_viewmodel.dart';
 import 'package:flutter_boilerplate/app/shared/services/sentry_service.dart';
-import 'package:flutter_boilerplate/app/shared/theme/theme_provider.dart';
+import 'package:flutter_boilerplate/app/shared/wrapper/localization_wrapper.dart';
+import 'package:flutter_boilerplate/app/shared/wrapper/state_wrapper.dart';
 import 'package:flutter_boilerplate/app_widget.dart';
-import 'package:provider/provider.dart';
 import 'package:timezone/data/latest_10y.dart' as tz;
 import 'package:flutter_boilerplate/app/shared/services/notification_service.dart';
 
@@ -33,29 +30,5 @@ Future<void> main() async {
     return true;
   };
 
-  runApp(
-    EasyLocalization(
-      supportedLocales: const [
-        Locale('en', 'US'),
-        Locale('pt', 'BR'),
-        Locale('es'),
-      ],
-      path: 'assets/translations',
-      fallbackLocale: const Locale('en-US'),
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<NotificationViewModel>(
-            create: (_) => NotificationViewModel(),
-          ),
-          ChangeNotifierProvider<LocaleViewModel>(
-            create: (_) => LocaleViewModel(),
-          ),
-          ChangeNotifierProvider<UiProvider>(
-            create: (_) => UiProvider()..init(),
-          ),
-        ],
-        child: const AppWidget(),
-      ),
-    ),
-  );
+  runApp(const LocalizationWrapper(child: StateWrapper(child: AppWidget())));
 }

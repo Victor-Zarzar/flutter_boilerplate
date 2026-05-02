@@ -32,24 +32,42 @@ build-ios-release:
 		--dart-define=SENTRY_ENV=${SENTRY_ENV} \
 		--obfuscate --split-debug-info=build/debug-info
 
+run-ios:
+	flutter run -d "iPhone 17" \
+		--dart-define=SENTRY_DSN=$(SENTRY_DSN) \
+		--dart-define=SENTRY_ENV=${SENTRY_ENV}
+
+run-chrome:
+	flutter run -d chrome \
+		--dart-define=SENTRY_DSN=$(SENTRY_DSN) \
+		--dart-define=SENTRY_ENV=${SENTRY_ENV}
+
+run-web-server:
+	flutter run -d web-server \
+		--dart-define=SENTRY_DSN=$(SENTRY_DSN) \
+		--dart-define=SENTRY_ENV=${SENTRY_ENV}
+
 help:
 	@echo ""
 	@echo "$(PROJECT_NAME) v$(VERSION_TAG)"
 	@echo "──────────────────────────────────────────────"
 	@echo " Development:"
-	@echo "   make install                   ➜ Install Flutter dependencies"
+	@echo "   make install                    Install Flutter dependencies"
+	@echo "   make run-ios                    Run iOS simulator"
+	@echo "   make run-chrome                 Run Chrome"
+	@echo "   make run-web-server             Run web server"
 	@echo ""
 	@echo " Production:"
-	@echo "   make build-web-prod            ➜ Build web (prod)"
+	@echo "   make build-web-prod             Build web (prod)"
 	@echo ""
 	@echo " Mobile:"
-	@echo "   make build-apk-release         ➜ Build APK release"
-	@echo "   make build-appbundle-release   ➜ Build AppBundle release"
-	@echo "   make build-ios-release         ➜ Build iOS release"
+	@echo "   make build-apk-release          Build APK release"
+	@echo "   make build-appbundle-release    Build AppBundle release"
+	@echo "   make build-ios-release          Build iOS release"
 	@echo ""
 	@echo " Cleanup:"
-	@echo "   make clean                     ➜ Clean Flutter cache"
+	@echo "   make clean                      Clean Flutter cache"
 	@echo ""
 	@echo " Help:"
-	@echo "   make help                      ➜ Show this menu"
+	@echo "   make help                       Show this menu"
 	@echo "──────────────────────────────────────────────"

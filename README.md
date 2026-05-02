@@ -44,6 +44,7 @@
 - **Flutter Local Notifications** - Push notifications
 - **Responsive Layout** - Adaptive UI for mobile and web
 - **Sentry Logs** - Error tracking and monitoring
+- **Skeleton** - Skeleton Wrapper Widget Animation
 
 ---
 
@@ -90,28 +91,28 @@ flutter pub get
 
 ### Local Development
 
-#### Mobile (Android Emulator)
-
-```bash
-flutter run -d android
-```
-
 #### Mobile (iOS Simulator)
 
 ```bash
-flutter run -d "iPhone 17"
+make run-ios
 ```
 
-#### Web (Chrome)
+### Inspect Devtools
 
 ```bash
-flutter run -d chrome
+dart devtools
 ```
 
-#### Web (Web Server)
+#### Web (Google Chrome)
 
 ```bash
-flutter run -d web-server
+make run-chrome
+```
+
+#### Or Web Server default
+
+```bash
+make run-web-server
 ```
 
 Access the application at `http://localhost:xxxx`
