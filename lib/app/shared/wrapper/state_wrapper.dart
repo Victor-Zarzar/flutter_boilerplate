@@ -19,7 +19,7 @@ class StateWrapper extends StatelessWidget {
         ChangeNotifierProvider<LocaleViewModel>(
           create: (_) => LocaleViewModel(),
         ),
-        ChangeNotifierProvider<UiProvider>(create: (_) => UiProvider()),
+        ChangeNotifierProvider(create: (_) => UiProvider()..init()),
       ],
       child: child,
     );
