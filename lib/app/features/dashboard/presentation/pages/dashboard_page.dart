@@ -1,193 +1,114 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/app/shared/theme/app_theme.dart';
-import 'package:flutter_boilerplate/app/shared/theme/theme_provider.dart';
-import 'package:flutter_boilerplate/app/shared/theme/typography_extension.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_boilerplate/app/features/dashboard/presentation/widgets/dashboard_card.dart';
+import 'package:flutter_boilerplate/app/features/dashboard/presentation/widgets/dashboard_card_section.dart';
+import 'package:flutter_boilerplate/app/shared/extensions/context_extension.dart';
+import 'package:flutter_boilerplate/app/shared/theme/app_borders.dart';
+import 'package:flutter_boilerplate/app/shared/theme/app_spacing.dart';
+import 'package:flutter_boilerplate/app/shared/widgets/app_top_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DashboardPage extends StatefulWidget {
+class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
-}
-
-class _DashboardPageState extends State<DashboardPage> {
-  @override
   Widget build(BuildContext context) {
-    final double myHeight = MediaQuery.of(context).size.height;
-    final double myWidth = MediaQuery.of(context).size.width;
+    final theme = context.theme;
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
 
-    return Consumer<UiProvider>(
-      builder: (context, notifier, child) {
-        return Scaffold(
-          backgroundColor: notifier.isDark
-              ? BackGroundColor.fourthColor
-              : BackGroundColor.primaryColor,
-          body: SizedBox(
-            height: myHeight,
-            width: myWidth,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: myWidth,
-                  child: AppBar(
-                    automaticallyImplyLeading: false,
-                    centerTitle: true,
-                    backgroundColor: notifier.isDark
-                        ? AppBarColor.thirdColor
-                        : AppBarColor.secondaryColor,
-                    title: Text('dashboard'.tr(), style: context.h1),
-                  ),
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _DashboardSection(
-                          title: 'overview'.tr(),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: _DashboardCard(
-                                  icon: Icons.analytics_outlined,
-                                  title: 'projects'.tr(),
-                                  value: '12',
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: _DashboardCard(
-                                  icon: Icons.task_alt_outlined,
-                                  title: 'tasks'.tr(),
-                                  value: '28',
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        _DashboardSection(
-                          title: 'performance'.tr(),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: _DashboardCard(
-                                  icon: Icons.speed_outlined,
-                                  title: 'productivity'.tr(),
-                                  value: '87%',
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: _DashboardCard(
-                                  icon: Icons.timer_outlined,
-                                  title: 'focus_time'.tr(),
-                                  value: '6h 40m',
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        _DashboardSection(
-                          title: 'summary'.tr(),
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: notifier.isDark
-                                  ? AppBarColor.thirdColor
-                                  : AppBarColor.secondaryColor,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.insights_outlined,
-                                  color: IconColor.primaryColor,
-                                  semanticLabel: 'dashboard_summary_icon'.tr(),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Text(
-                                    'dashboard_description'.tr(),
-                                    style: context.h2,
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+    return Scaffold(
+      backgroundColor: colorScheme.surface,
+      appBar: AppTopBar(title: 'dashboard'.tr()),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(AppSpacing.xl.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DashboardSection(
+                title: 'overview'.tr(),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: DashboardCard(
+                        icon: Icons.analytics_outlined,
+                        title: 'projects'.tr(),
+                        value: '12',
+                      ),
                     ),
+                    SizedBox(width: AppSpacing.md.w),
+                    Expanded(
+                      child: DashboardCard(
+                        icon: Icons.task_alt_outlined,
+                        title: 'tasks'.tr(),
+                        value: '28',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: AppSpacing.xl.h),
+              DashboardSection(
+                title: 'performance'.tr(),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: DashboardCard(
+                        icon: Icons.speed_outlined,
+                        title: 'productivity'.tr(),
+                        value: '87%',
+                      ),
+                    ),
+                    SizedBox(width: AppSpacing.md.w),
+                    Expanded(
+                      child: DashboardCard(
+                        icon: Icons.timer_outlined,
+                        title: 'focus_time'.tr(),
+                        value: '6h 40m',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: AppSpacing.xl.h),
+              DashboardSection(
+                title: 'summary'.tr(),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(AppSpacing.lg.w),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surfaceContainerHighest,
+                    borderRadius: AppBorders.lg,
+                    border: Border.all(color: colorScheme.outlineVariant),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.insights_outlined,
+                        size: 28.sp,
+                        color: colorScheme.primary,
+                        semanticLabel: 'dashboard_summary_icon'.tr(),
+                      ),
+                      SizedBox(width: AppSpacing.md.w),
+                      Expanded(
+                        child: Text(
+                          'dashboard_description'.tr(),
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                            fontSize: 14.sp,
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        );
-      },
-    );
-  }
-}
-
-class _DashboardSection extends StatelessWidget {
-  const _DashboardSection({required this.title, required this.child});
-
-  final String title;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: context.h2),
-        const SizedBox(height: 10),
-        child,
-      ],
-    );
-  }
-}
-
-class _DashboardCard extends StatelessWidget {
-  const _DashboardCard({
-    required this.icon,
-    required this.title,
-    required this.value,
-  });
-
-  final IconData icon;
-  final String title;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    final uiProvider = context.watch<UiProvider>();
-
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: uiProvider.isDark
-            ? AppBarColor.thirdColor
-            : AppBarColor.secondaryColor,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: IconColor.primaryColor, semanticLabel: title),
-          const SizedBox(height: 12),
-          Text(title, style: context.h2),
-          const SizedBox(height: 8),
-          Text(value, style: context.h1),
-        ],
+        ),
       ),
     );
   }

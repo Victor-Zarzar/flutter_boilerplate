@@ -1,9 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/app/shared/theme/app_theme.dart';
-import 'package:flutter_boilerplate/app/shared/theme/theme_provider.dart';
-import 'package:flutter_boilerplate/app/shared/theme/typography_extension.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_boilerplate/app/shared/extensions/context_extension.dart';
+import 'package:flutter_boilerplate/app/shared/theme/app_borders.dart';
+import 'package:flutter_boilerplate/app/shared/theme/app_spacing.dart';
+import 'package:flutter_boilerplate/app/shared/widgets/app_top_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatefulWidget {
@@ -23,84 +24,86 @@ class _AboutPageState extends State<AboutPage> {
 
   @override
   Widget build(BuildContext context) {
-    final double myHeight = MediaQuery.of(context).size.height;
-    final double myWidth = MediaQuery.of(context).size.width;
-    return Consumer<UiProvider>(
-      builder: (context, notifier, child) {
-        return Scaffold(
-          backgroundColor: notifier.isDark
-              ? BackGroundColor.fourthColor
-              : BackGroundColor.primaryColor,
-          body: SizedBox(
-            height: myHeight,
-            width: myWidth,
-            child: Column(
-              children: [
-                SizedBox(
-                  width: myWidth,
-                  child: AppBar(
-                    leading: Semantics(
-                      label: 'backtopage'.tr(),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          size: 20,
-                          color: IconColor.primaryColor,
-                          semanticLabel: 'arrow_back_icon'.tr(),
-                        ),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                    ),
-                    centerTitle: true,
-                    backgroundColor: notifier.isDark
-                        ? AppBarColor.thirdColor
-                        : AppBarColor.secondaryColor,
-                    title: Text('about'.tr(), style: context.h1),
-                  ),
-                ),
-                Expanded(
+    final theme = context.theme;
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
+    return Scaffold(
+      backgroundColor: colorScheme.surface,
+      appBar: AppTopBar(title: 'about'.tr(), showBackButton: true),
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              padding: EdgeInsets.all(AppSpacing.xl.w),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Row(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.info,
+                          Icons.add_ic_call,
+                          size: 48.sp,
+                          color: colorScheme.primary,
                           semanticLabel: 'informationicon'.tr(),
-                          color: IconColor.primaryColor,
                         ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            'description'.tr(),
-                            style: context.h2,
-                            textAlign: TextAlign.justify,
+
+                        SizedBox(height: AppSpacing.lg.h),
+
+                        Text(
+                          'about'.tr(),
+                          textAlign: TextAlign.center,
+                          style: textTheme.headlineMedium?.copyWith(
+                            fontWeight: FontWeight.w900,
+                            color: colorScheme.onSurface,
+                            fontSize: 28.sp,
+                          ),
+                        ),
+
+                        SizedBox(height: AppSpacing.md.h),
+
+                        Text(
+                          'description'.tr(),
+                          textAlign: TextAlign.center,
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                            fontSize: 14.sp,
+                            height: 1.5,
+                          ),
+                        ),
+
+                        SizedBox(height: AppSpacing.xl.h),
+
+                        InkWell(
+                          borderRadius: AppBorders.lg,
+                          onTap: () =>
+                              _launchUrl('https://www.victorzarzar.com.br'),
+                          child: Padding(
+                            padding: EdgeInsets.all(AppSpacing.md.w),
+                            child: Text(
+                              'developed'.tr(),
+                              textAlign: TextAlign.center,
+                              style: textTheme.bodyMedium?.copyWith(
+                                color: colorScheme.primary,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14.sp,
+                              ),
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 40),
-                    child: GestureDetector(
-                      onTap: () {
-                        _launchUrl('https://www.victorzarzar.com.br');
-                      },
-                      child: Text(
-                        'developed'.tr(),
-                        textAlign: TextAlign.center,
-                        style: context.h2,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

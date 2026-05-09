@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate/app/presentation/viewmodels/locale_viewmodel.dart';
 import 'package:flutter_boilerplate/app/presentation/viewmodels/notification_viewmodel.dart';
-import 'package:flutter_boilerplate/app/shared/theme/theme_provider.dart';
+import 'package:flutter_boilerplate/app/presentation/viewmodels/theme_viewmodel.dart';
+
 import 'package:provider/provider.dart';
 
 class StateWrapper extends StatelessWidget {
@@ -19,7 +20,7 @@ class StateWrapper extends StatelessWidget {
         ChangeNotifierProvider<LocaleViewModel>(
           create: (_) => LocaleViewModel(),
         ),
-        ChangeNotifierProvider(create: (_) => UiProvider()..init()),
+        ChangeNotifierProvider(create: (_) => ThemeViewModel()..init()),
       ],
       child: child,
     );

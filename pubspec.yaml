@@ -25,6 +25,7 @@ dependencies:
   font_awesome_flutter: ^11.0.0
   go_router: ^17.2.2
   skeletonizer: ^2.1.3
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:
@@ -37,7 +38,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/
     - assets/translations/
     - assets/icons/
     - assets/fonts/Roboto-Regular.ttf

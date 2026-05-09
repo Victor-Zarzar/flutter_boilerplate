@@ -6,238 +6,214 @@ import 'package:flutter_boilerplate/app/features/settings/presentation/pages/the
 import 'package:flutter_boilerplate/app/presentation/viewmodels/locale_viewmodel.dart';
 import 'package:flutter_boilerplate/app/presentation/viewmodels/notification_viewmodel.dart';
 import 'package:flutter_boilerplate/app/shared/assets/locale_flag.dart';
-import 'package:flutter_boilerplate/app/shared/theme/app_theme.dart';
-import 'package:flutter_boilerplate/app/shared/theme/theme_provider.dart';
-import 'package:flutter_boilerplate/app/shared/theme/typography_extension.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_boilerplate/app/shared/extensions/context_extension.dart';
+import 'package:flutter_boilerplate/app/shared/theme/app_borders.dart';
+import 'package:flutter_boilerplate/app/shared/theme/app_spacing.dart';
+import 'package:flutter_boilerplate/app/shared/widgets/app_top_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
-  @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
+  String _currentLanguageKey(Locale locale) {
+    return switch (locale.languageCode) {
+      'pt' => 'portuguese',
+      'es' => 'spanish',
+      _ => 'english',
+    };
+  }
 
-class _SettingsPageState extends State<SettingsPage> {
-  Widget _buildTrailingArrow() {
-    return SizedBox(
-      width: 32,
-      height: 32,
-      child: Center(
-        child: Icon(
-          Icons.chevron_right,
-          size: 28,
-          color: IconColor.primaryColor,
-          semanticLabel: 'arrow_forward_icon'.tr(),
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = context.theme.colorScheme;
+    final textTheme = context.theme.textTheme;
+    final currentLocale = context.locale;
+
+    return Scaffold(
+      backgroundColor: colorScheme.surface,
+      appBar: AppTopBar(title: 'settings'.tr()),
+      body: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.all(AppSpacing.xl.w),
+          children: [
+            _SettingsTile(
+              icon: Icons.translate,
+              title: 'language'.tr(),
+              trailing: PopupMenuButton<Locale>(
+                initialValue: currentLocale,
+                color: colorScheme.surfaceContainerHighest,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: AppBorders.card,
+                ),
+                icon: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.language, color: colorScheme.primary),
+                    SizedBox(width: AppSpacing.xs.w),
+                    Text(
+                      _currentLanguageKey(currentLocale).tr(),
+                      style: textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurface,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 13.sp,
+                      ),
+                    ),
+                    Icon(Icons.arrow_drop_down, color: colorScheme.primary),
+                  ],
+                ),
+                onSelected: (locale) {
+                  context.read<LocaleViewModel>().changeLanguage(
+                    context,
+                    locale,
+                  );
+                },
+                itemBuilder: (_) => [
+                  _languageItem(
+                    context: context,
+                    locale: const Locale('en'),
+                    flag: EN.asset(),
+                    label: 'english'.tr(),
+                  ),
+                  _languageItem(
+                    context: context,
+                    locale: const Locale('pt'),
+                    flag: PTBR.asset(),
+                    label: 'portuguese'.tr(),
+                  ),
+                  _languageItem(
+                    context: context,
+                    locale: const Locale('es'),
+                    flag: ES.asset(),
+                    label: 'spanish'.tr(),
+                  ),
+                ],
+              ),
+            ),
+
+            if (!kIsWeb) ...[
+              SizedBox(height: AppSpacing.md.h),
+              _SettingsTile(
+                icon: Icons.notifications_outlined,
+                title: 'enable_notifications'.tr(),
+                onTap: context
+                    .read<NotificationViewModel>()
+                    .openSystemNotificationSettings,
+              ),
+            ],
+
+            SizedBox(height: AppSpacing.md.h),
+            _SettingsTile(
+              icon: Icons.color_lens_outlined,
+              title: 'theme'.tr(),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(builder: (_) => const ThemePage()),
+                );
+              },
+            ),
+
+            SizedBox(height: AppSpacing.md.h),
+            _SettingsTile(
+              icon: Icons.info_outline,
+              title: 'about'.tr(),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(builder: (_) => const AboutPage()),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final double myHeight = MediaQuery.of(context).size.height;
-    final double myWidth = MediaQuery.of(context).size.width;
-    final Locale currentLocale = context.locale;
+  PopupMenuItem<Locale> _languageItem({
+    required BuildContext context,
+    required Locale locale,
+    required Widget flag,
+    required String label,
+  }) {
+    final colorScheme = context.theme.colorScheme;
+    final textTheme = context.theme.textTheme;
 
-    final NotificationViewModel controller = Provider.of<NotificationViewModel>(
-      context,
-      listen: false,
-    );
-
-    String currentLanguageKey;
-    if (currentLocale.languageCode == 'pt') {
-      currentLanguageKey = 'portuguese';
-    } else if (currentLocale.languageCode == 'es') {
-      currentLanguageKey = 'spanish';
-    } else {
-      currentLanguageKey = 'english';
-    }
-
-    return Consumer2<UiProvider, NotificationViewModel>(
-      builder: (context, notifier, notificationController, child) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: notifier.isDark
-                ? AppBarColor.thirdColor
-                : AppBarColor.secondaryColor,
-            automaticallyImplyLeading: false,
-            centerTitle: true,
-            title: Text('settings'.tr(), style: context.h1),
-          ),
-          body: ColoredBox(
-            color: notifier.isDark
-                ? BackGroundColor.fourthColor
-                : BackGroundColor.primaryColor,
-            child: SizedBox(
-              height: myHeight,
-              width: myWidth,
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.translate,
-                        color: IconColor.primaryColor,
-                        semanticLabel: 'translate_icon'.tr(),
-                      ),
-                      title: Text(
-                        'language'.tr(),
-                        style: context.bodyMediumFont,
-                      ),
-                      trailing: PopupMenuButton<Locale>(
-                        initialValue: currentLocale,
-                        color: notifier.isDark
-                            ? PopupMenuColor.fourthColor
-                            : PopupMenuColor.thirdColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        icon: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.language,
-                              color: IconColor.primaryColor,
-                              semanticLabel: 'language_icon'.tr(),
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              currentLanguageKey.tr(),
-                              style: context.bodyMediumFont,
-                            ),
-                            Icon(
-                              Icons.arrow_drop_down,
-                              color: IconColor.primaryColor,
-                              semanticLabel: 'arrow_drop_icon'.tr(),
-                            ),
-                          ],
-                        ),
-                        onSelected: (Locale locale) {
-                          Provider.of<LocaleViewModel>(
-                            context,
-                            listen: false,
-                          ).changeLanguage(context, locale);
-                        },
-                        itemBuilder: (BuildContext context) => [
-                          PopupMenuItem(
-                            value: const Locale('en'),
-                            child: Row(
-                              children: [
-                                EN.asset(),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'english'.tr(),
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                      color: TextColor.primaryColor,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          PopupMenuItem(
-                            value: const Locale('pt'),
-                            child: Row(
-                              children: [
-                                PTBR.asset(),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'portuguese'.tr(),
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                      color: TextColor.primaryColor,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          PopupMenuItem(
-                            value: const Locale('es'),
-                            child: Row(
-                              children: [
-                                ES.asset(),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'spanish'.tr(),
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                      color: TextColor.primaryColor,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  if (!kIsWeb)
-                    ListTile(
-                      leading: Icon(
-                        Icons.notifications,
-                        color: IconColor.primaryColor,
-                        semanticLabel: 'information_icon'.tr(),
-                      ),
-                      title: Text(
-                        'enable_notifications'.tr(),
-                        style: context.bodyMediumFont,
-                      ),
-                      trailing: _buildTrailingArrow(),
-                      onTap: controller.openSystemNotificationSettings,
-                    ),
-                  const SizedBox(height: 5),
-                  ListTile(
-                    leading: Icon(
-                      Icons.color_lens,
-                      color: IconColor.primaryColor,
-                      semanticLabel: 'color_icon'.tr(),
-                    ),
-                    title: Text('theme'.tr(), style: context.bodyMediumFont),
-                    trailing: _buildTrailingArrow(),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (_) => const ThemePage(),
-                        ),
-                      );
-                    },
-                  ),
-                  if (!kIsWeb) const SizedBox(height: 5),
-                  ListTile(
-                    leading: Icon(
-                      Icons.info,
-                      color: IconColor.primaryColor,
-                      semanticLabel: 'info_icon'.tr(),
-                    ),
-                    title: Text('about'.tr(), style: context.bodyMediumFont),
-                    trailing: _buildTrailingArrow(),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (_) => const AboutPage(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+    return PopupMenuItem(
+      value: locale,
+      child: Row(
+        children: [
+          flag,
+          SizedBox(width: AppSpacing.sm.w),
+          Text(
+            label,
+            style: textTheme.bodyMedium?.copyWith(
+              color: colorScheme.onSurface,
+              fontWeight: FontWeight.w600,
+              fontSize: 14.sp,
             ),
           ),
-        );
-      },
+        ],
+      ),
+    );
+  }
+}
+
+class _SettingsTile extends StatelessWidget {
+  const _SettingsTile({
+    required this.icon,
+    required this.title,
+    this.trailing,
+    this.onTap,
+  });
+
+  final IconData icon;
+  final String title;
+  final Widget? trailing;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = context.theme.colorScheme;
+    final textTheme = context.theme.textTheme;
+
+    return InkWell(
+      borderRadius: AppBorders.card,
+      onTap: onTap,
+      child: Ink(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.lg.w,
+          vertical: AppSpacing.md.h,
+        ),
+        decoration: BoxDecoration(
+          color: colorScheme.surfaceContainerHighest,
+          borderRadius: AppBorders.card,
+          border: Border.all(color: colorScheme.outlineVariant),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: colorScheme.primary, size: 24.sp),
+            SizedBox(width: AppSpacing.md.w),
+            Expanded(
+              child: Text(
+                title,
+                style: textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.onSurface,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 15.sp,
+                ),
+              ),
+            ),
+            trailing ??
+                Icon(
+                  Icons.chevron_right,
+                  color: colorScheme.onSurfaceVariant,
+                  size: 26.sp,
+                ),
+          ],
+        ),
+      ),
     );
   }
 }

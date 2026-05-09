@@ -1,57 +1,72 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/app/routes/app_router_extension.dart';
-import 'package:flutter_boilerplate/app/routes/nav_config.dart';
-import 'package:flutter_boilerplate/app/shared/theme/app_theme.dart';
-import 'package:flutter_boilerplate/app/shared/theme/theme_provider.dart';
+import 'package:flutter_boilerplate/app/routes/app_routes.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class MobileLayout extends StatelessWidget {
-  const MobileLayout({super.key, required this.child});
+  const MobileLayout({super.key, required this.child, required this.location});
 
   final Widget child;
+  final String location;
 
-  int _currentIndex(BuildContext context) {
-    final location = GoRouterState.of(context).uri.path;
+  static const List<String> _routes = [
+    AppRoutes.home,
+    AppRoutes.dashboard,
+    AppRoutes.settings,
+  ];
 
-    final index = NavConfig.mobile.indexWhere(
-      (item) => item.route.path == location,
-    );
-
+  int get _currentIndex {
+    final int index = _routes.indexOf(location);
     return index >= 0 ? index : 0;
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentIndex = _currentIndex(context);
-    final uiProvider = context.watch<UiProvider>();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Scaffold(
       body: child,
       bottomNavigationBar: NavigationBar(
-        backgroundColor: uiProvider.isDark
-            ? TabBarColor.fourthColor
-            : TabBarColor.thirdColor,
-        indicatorColor: uiProvider.isDark
-            ? TabBarColor.fifthColor
-            : TabBarColor.secondaryColor,
-        selectedIndex: currentIndex,
+        selectedIndex: _currentIndex,
         onDestinationSelected: (index) {
-          context.goTo(NavConfig.mobile[index].route);
+          context.go(_routes[index]);
         },
-        labelTextStyle: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
-            return TextStyle(color: TextColor.primaryColor);
-          }
-          return TextStyle(color: TextColor.primaryColor);
-        }),
-        destinations: NavConfig.mobile.map((item) {
-          return NavigationDestination(
-            icon: Icon(item.icon, color: IconColor.primaryColor),
-            label: item.labelKey.tr(),
-          );
-        }).toList(),
+        destinations: [
+          NavigationDestination(
+            icon: Icon(
+              Icons.home_outlined,
+              color: colorScheme.onSurfaceVariant,
+            ),
+            selectedIcon: Icon(
+              Icons.home,
+              color: colorScheme.onSecondaryContainer,
+            ),
+            label: 'home'.tr(),
+          ),
+          NavigationDestination(
+            icon: Icon(
+              Icons.dashboard_outlined,
+              color: colorScheme.onSurfaceVariant,
+            ),
+            selectedIcon: Icon(
+              Icons.dashboard,
+              color: colorScheme.onSecondaryContainer,
+            ),
+            label: 'dashboard'.tr(),
+          ),
+          NavigationDestination(
+            icon: Icon(
+              Icons.settings_outlined,
+              color: colorScheme.onSurfaceVariant,
+            ),
+            selectedIcon: Icon(
+              Icons.settings,
+              color: colorScheme.onSecondaryContainer,
+            ),
+            label: 'settings'.tr(),
+          ),
+        ],
       ),
     );
   }
