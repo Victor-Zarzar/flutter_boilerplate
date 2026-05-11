@@ -1,5 +1,5 @@
 <h1 align="center" id="header">
-  flutter_boilerplate - Flutter Multi-Platform Boilerplate
+  flutter-boilerplate - Flutter Multi-Platform Boilerplate
 </h1>
 
 <p align="center">
@@ -68,7 +68,7 @@ Before starting, ensure you have the following installed:
 ### 1. Clone the Repository (Template)
 
 ```bash
-git clone https://github.com/Victor-Zarzar/flutter_boilerplate.git my_app
+git clone https://github.com/Victor-Zarzar/flutter-boilerplate.git my_app
 cd my_app
 flutter pub get
 ```
@@ -234,6 +234,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Victor Zarzar - [@Victor-Zarzar](https://github.com/Victor-Zarzar)
 
-Project Link: [https://github.com/Victor-Zarzar/flutter_boilerplate](https://github.com/Victor-Zarzar/flutter_boilerplate)
+Project Link: [https://github.com/Victor-Zarzar/flutter-boilerplate](https://github.com/Victor-Zarzar/flutter-boilerplate)
 
 ---

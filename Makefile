@@ -9,6 +9,9 @@ clean:
 	rm -rf build/ .dart_tool/ .flutter-plugins .flutter-plugins-dependencies 2>/dev/null || true
 	flutter clean && flutter pub cache clean
 
+test-dev:
+	flutter test
+
 build-web-prod:
 	flutter build web --release \
 		--dart-define=SENTRY_DSN=$(SENTRY_DSN) \
