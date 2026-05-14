@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/app/shared/extensions/context_extension.dart';
+import 'package:flutter_boilerplate/app/shared/services/url_launcher_service.dart';
 import 'package:flutter_boilerplate/app/shared/theme/app_borders.dart';
 import 'package:flutter_boilerplate/app/shared/theme/app_spacing.dart';
+import 'package:flutter_boilerplate/app/shared/utils/logger.dart';
 import 'package:flutter_boilerplate/app/shared/widgets/app_top_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({super.key});
@@ -15,11 +16,14 @@ class AboutPage extends StatefulWidget {
 }
 
 class _AboutPageState extends State<AboutPage> {
-  Future<void> _launchUrl(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
-      throw Exception('${'launch_error'.tr()} $url');
-    }
+  Future<void> _openPortfolio() async {
+    final result = await UrlLauncherService.instance.launch(
+      'www.victorzarzar.com.br',
+    );
+
+    result.fold((failure) {
+      AppLogger.error(failure.toString());
+    }, (_) {});
   }
 
   @override
@@ -80,8 +84,7 @@ class _AboutPageState extends State<AboutPage> {
 
                         InkWell(
                           borderRadius: AppBorders.lg,
-                          onTap: () =>
-                              _launchUrl('https://www.victorzarzar.com.br'),
+                          onTap: _openPortfolio,
                           child: Padding(
                             padding: EdgeInsets.all(AppSpacing.md.w),
                             child: Text(

@@ -1,5 +1,5 @@
 <h1 align="center" id="header">
-  flutter-boilerplate - Flutter Multi-Platform Boilerplate
+  Flutter Multi-Platform Boilerplate
 </h1>
 
 <p align="center">
@@ -45,6 +45,11 @@
 - **Responsive Layout** - Adaptive UI for mobile and web
 - **Sentry Logs** - Error tracking and monitoring
 - **Skeleton** - Skeleton Wrapper Widget Animation
+- **URL Launcher** - Smart URL, phone, and WhatsApp link handling
+- **Version Update** - In-app update checks for App Store and Play Store
+- **HTTP Service** - Centralized REST client with logging
+- **Internet Connection** - Real-time connectivity detection
+- **App Logger** - Structured, color-coded debug logging
 
 ---
 
