@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://github.com/Victor-Zarzar/flutter-boilerplate/compare/v1.2.0...v1.3.0) (2026-05-14)
+
+
+### Features
+
+* add new design systems and update routes. ([de5440a](https://github.com/Victor-Zarzar/flutter-boilerplate/commit/de5440a58325c22596ee6ec32bc1b1a5e856c6b2))
+* add new widgets and services ([361d937](https://github.com/Victor-Zarzar/flutter-boilerplate/commit/361d937ff84558e58a049b1b0a9594e9358f1bc2))
+
 ## [1.2.0](https://github.com/Victor-Zarzar/flutter_boilerplate/compare/v1.1.0...v1.2.0) (2026-05-02)
 
 
