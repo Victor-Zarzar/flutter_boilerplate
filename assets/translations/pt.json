@@ -42,5 +42,7 @@
 	"description": "Este aplicativo foi desenvolvido como um boilerplate moderno, focado em boas práticas como arquitetura MVVM, suporte a múltiplas plataformas (mobile e web), internacionalização (i18n), tema escuro e código limpo.",
 	"developed": "Desenvolvido por Victor Zarzar",
 	"launch_error": "Erro ao abrir o link:",
-	"informationicon": "Informações sobre o aplicativo"
+	"informationicon": "Informações sobre o aplicativo",
+	"title_notification": "Está gostando do nosso app?",
+	"body_notification": "Nos avalie na loja!"
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/app/shared/utils/logger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -11,7 +11,7 @@ class NotificationService {
   static Future<void> onDidReceiveNotification(
     NotificationResponse notificationResponse,
   ) async {
-    debugPrint('Notification receive: ${notificationResponse.payload}');
+    AppLogger.debug('Notification receive: ${notificationResponse.payload}');
   }
 
   static Future<bool> areNotificationsEnabled() async {

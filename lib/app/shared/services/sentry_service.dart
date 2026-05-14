@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_boilerplate/app/shared/constants/constants.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 class SentryService {
@@ -8,15 +9,11 @@ class SentryService {
   bool _initialized = false;
 
   Future<void> init() async {
-    const dsn = String.fromEnvironment('SENTRY_DSN');
-    if (dsn.isEmpty) return;
+    if (Constants.sentryDsn.isEmpty) return;
 
     await SentryFlutter.init((options) {
-      options.dsn = dsn;
-      options.environment = const String.fromEnvironment(
-        'SENTRY_ENV',
-        defaultValue: 'production',
-      );
+      options.dsn = Constants.sentryDsn;
+      options.environment = Constants.sentryEnv;
       options.tracesSampleRate = 1.0;
       options.debug = kDebugMode;
       options.appHangTimeoutInterval = const Duration(seconds: 4);

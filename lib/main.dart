@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/app/config/app_config.dart';
 import 'package:flutter_boilerplate/app/shared/services/sentry_service.dart';
 import 'package:flutter_boilerplate/app/shared/wrapper/localization_wrapper.dart';
 import 'package:flutter_boilerplate/app/shared/wrapper/state_wrapper.dart';
@@ -11,6 +12,8 @@ import 'package:flutter_boilerplate/app/shared/services/notification_service.dar
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  await AppConfig.init();
 
   if (!kIsWeb) {
     await NotificationService.init();

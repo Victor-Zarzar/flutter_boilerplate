@@ -42,5 +42,7 @@
 	"description": "This application was developed as a modern boilerplate, focused on best practices such as MVVM architecture, multi-platform support (mobile and web), internationalization (i18n), dark mode, and clean code.",
 	"developed": "Developed by Victor Zarzar",
 	"launch_error": "Error opening link:",
-	"informationicon": "Application information"
+	"informationicon": "Application information",
+	"title_notification": "Do you like our app?",
+	"body_notification": "Rate us in the store!"
 }

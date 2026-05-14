@@ -6,7 +6,6 @@ import 'package:flutter_boilerplate/app/shared/theme/app_borders.dart';
 import 'package:flutter_boilerplate/app/shared/theme/app_spacing.dart';
 import 'package:flutter_boilerplate/app/shared/widgets/app_top_bar.dart';
 import 'package:flutter_boilerplate/app/shared/wrapper/responsive_wrapper.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
