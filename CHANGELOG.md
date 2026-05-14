@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/Victor-Zarzar/flutter-boilerplate/compare/v1.3.0...v1.3.1) (2026-05-14)
+
+
+### Bug Fixes
+
+* actions ([025c11a](https://github.com/Victor-Zarzar/flutter-boilerplate/commit/025c11afecc8686d01f575f7b3581f7d969fb05b))
+
 ## [1.3.0](https://github.com/Victor-Zarzar/flutter-boilerplate/compare/v1.2.0...v1.3.0) (2026-05-14)
 
 
